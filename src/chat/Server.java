@@ -1,3 +1,5 @@
+package chat;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.BufferedReader;
@@ -13,10 +15,13 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         int port = args.length > 0 ? Integer.parseInt(args[0]) : 12345;
-        ServerSocket serverSocket = new ServerSocket(port);
+
+        ServerSocket serverSocket = new ServerSocket(port); //cria serverSocket na porta 12345
         System.out.println("Servidor rodando na porta " + port);
+
         while (true) {
-            Socket socket = serverSocket.accept();
+            Socket socket = serverSocket.accept(); //aceita a conexão
+
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             clients.add(out);
             new Thread(() -> handle(socket, out)).start();
